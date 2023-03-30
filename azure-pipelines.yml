@@ -1,0 +1,28 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    method: 'POST'
+    headers: |
+      {
+          "status": "success",
+          "data": {
+              "name": "test",
+              "salary": "123",
+              "age": "23",
+              "id": 25
+          }
+      }
+    urlSuffix: 'https://dummy.restapiexample.com/api/v1/create'
+    waitForCompletion: 'false'
