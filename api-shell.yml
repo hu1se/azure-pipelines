@@ -1,1 +1,15 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      response=$(curl -s -X POST -H "Content-Type: application/json" -d '{"name": "test", "salary": "123", "age": "23"}' https://dummy.restapiexample.com/api/v1/create)
+      id=$(echo "$response" | jq -r '.data.id')
+      echo "The ID of the newly created employee is $id"
 
