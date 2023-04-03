@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo "Sending POST request to REST API"
+  displayName: 'Send POST request to REST API'
+
+- task: HttpRequest@1
+  inputs:
+    httpMethod: 'POST'
+    uri: 'https://abc.com'
+    useTls12: true
+    disableRedirect: false
+    allowUntrustedCerts: false
+    contentType: 'application/json'
+    requestBody: |
+      {
+        "key": "value"
+      }
+    headers: |
+      {
+        "Content-Type": "application/json"
+      }
+  displayName: 'REST API POST request'
