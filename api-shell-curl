@@ -1,0 +1,13 @@
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    echo "Sending POST request to REST API"
+    curl -k -X POST -H "Content-Type: application/json" -d '{"key": "value"}' https://abc.com
+  displayName: 'Send POST request to REST API using shell script'
